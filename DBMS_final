@@ -1,0 +1,157 @@
+/*Database Management System Final project
+Submitted by Winyarat Pattanawadee, Wu Xi-Yi, Curtis Teitleman
+Synopsis: the database models a hospital in which there are patients, employees, physicians and nurses
+*/
+
+CREATE TABLE Hospital
+(
+  Hospital_Id   INT NOT NULL,
+  Hostpital_Name VARCHAR(20),
+  Hospital_Adress VARCHAR(20),
+  Hospital_City   VARCHAR(20),
+  Hospital_State  VARCHAR(2),
+  Hospital_Phone  INT(11),
+  CONSTRAINT Hospital_PK PRIMARY KEY (Hospital_Id)
+);
+
+CREATE TABLE Patient
+(
+  Patient_Id  INT NOT NULL,
+  Hospital_Id INT NOT NULL,
+  Patient_Name VARCHAR(20),
+  Patient_Adress VARCHAR(20),
+  Patient_City   VARCHAR(20),
+  Patient_State  VARCHAR(20),
+  Patient_Phone  INT(11),
+  Patient_DOB    INT(6),
+  CONSTRAINT Patient_PK PRIMARY KEY (Patient_Id),
+  CONSTRAINT Patient_FK1 FOREIGN KEY (Hospital_Id) REFERENCES Hospital(Hospital_Id)
+);
+
+CREATE TABLE Physician
+(
+  Physician_Id  INT NOT NULL,
+  Hospital_Id   INT NOT NULL,
+  Patient_Id    INT NOT NULL,
+  Physician_Adress  VARCHAR(20),
+  Physician_State   VARCHAR(2),
+  Physician_City    VARCHAR(20),
+  Physician_Phone   INT(11),
+  CONSTRAINT Physician_PK PRIMARY KEY (Physician_Id),
+  CONSTRAINT Physician_FK1 FOREIGN KEY (Hospital_Id) REFERENCES Hostpital(Hospital_Id),
+  CONSTRAINT Physician_FK2 FOREIGN KEY (Patient_Id) REFERENCES Patient(Patient_Id)
+);
+
+CREATE TABLE Staff
+(
+  Staff_Id  INT NOT NULL,
+  Hospital_Id INT NOT NULL,
+  Staff_Adress  VARCHAR(20),
+  Staff_City    VARCHAR(20),
+  Staff_State   VARCHAR(2),
+  Staff_Phone   INT(11),
+  Staff_DOB     INT(6),
+  Staff_Age     INT(3),
+  CONSTRAINT Staff_PK PRIMARY KEY (Staff_Id),
+  CONSTRAINT Staff_Fk1 FOREIGN KEY (Hospital_Id) REFERENCES Hospital(Hospital_Id)
+);
+
+/*Staff*/
+INSERT INTO STAFF VALUES(3121,'9','Lily','2 Washington St.','Boston','MA','(617)991-0012','1990-11-29');
+INSERT INTO STAFF VALUES(2342,'2','Rose','12 Factory St.','Boston','MA','(617)112-3479','1991-3-2');
+INSERT INTO STAFF VALUES(6563,'11','Adam','64 Madison St.','Boston','MA','(617)929-0013','1980-4-4');
+INSERT INTO STAFF VALUES(2424,'14','Bell','12 Colchester St.','Boston','MA','(617)327-2893','1978-1-12');
+INSERT INTO STAFF VALUES(3945,'9','Carroll','10 Monmouth St.','Boston','MA','(617)334-2394','1966-5-26');
+INSERT INTO STAFF VALUES(1946,'10','Charles','3 Brooks St.','Boston','MA','(617)188-1620','1971-3-19');
+INSERT INTO STAFF VALUES(4587,'4','Henry','77 Henry St.','Boston','MA','(617)990-1672','1970-12-1');
+INSERT INTO STAFF VALUES(2528,'1','Darwin','1 Trenton St.','Boston','MA','(617)178-3483','1956-12-28');
+INSERT INTO STAFF VALUES(6449,'8','Kelly','5 Pearl Pl','Boston','MA','(617)193-2222','1969-2-14');
+INSERT INTO STAFF VALUES(1430,'15','Lee','23 Berkeley St.','Boston','MA','(617)999-6172','1961-7-18');
+INSERT INTO STAFF VALUES(2511,'6','Martin','4 Lincoln Pl','Boston','MA','(617)178-8888','1989-9-1');
+INSERT INTO STAFF VALUES(9212,'10','Pope','13 Plympton St.','Boston','MA','(617)828-1128','1977-10-18');
+
+/*Patient*/
+INSERT INTO PATIENT VALUES (12345,'01','Smith','30 Court Dr.','Boston','MA','(617)123-5678','1990-4-5');
+INSERT INTO PATIENT VALUES (18902,'14','West','60 Eutaw St.','Boston','MA','(617)789-3421','1990-9-3');
+INSERT INTO PATIENT VALUES (34657,'13','Taylor','88 Friend St.','Boston','MA','(617)447-9309','1980-9-5');
+INSERT INTO PATIENT VALUES (78934,'7','Popkin','23 Prince St.','Boston','MA','(617)990-13678','1990-4-5');
+INSERT INTO PATIENT VALUES (90904,'8','Rice','87 Boyston St.','Boston','MA','(617)123-3378','1978-1-1');
+INSERT INTO PATIENT VALUES (23819,'3','Namth','18 Deswell St.','Boston','MA','(617)672-9180','1987-5-2');
+INSERT INTO PATIENT VALUES (89764,'4','Cindy','20 Tremont St.','Boston','MA','(617)123-5678','1980-10-24');
+INSERT INTO PATIENT VALUES (12478,'12','Jenny','22 Beacon St.','Boston','MA','(617)314-9090','1988-12-30');
+INSERT INTO PATIENT VALUES (12340,'1','Patty','16 Riverway St.','Boston','MA','(617)719-1734','1890-9-7');
+INSERT INTO PATIENT VALUES (12420,'2','Curry','9 Beacon St.','Boston','MA','(617)111-2156','1990-7-5');
+INSERT INTO PATIENT VALUES (78649,'4','Tutch','18 Court St.','Boston','MA','(617)671-9242','1981-8-18');
+INSERT INTO PATIENT VALUES (77728,'3','Brian','8 Fenway St.','Boston','MA','(617)7452-9143','1986-1-2');
+INSERT INTO PATIENT VALUES (10789,'1','John','41 Union St.','Boston','MA','(617)132-2137','1976-12-5');
+INSERT INTO PATIENT VALUES (56728,'15','Kevin','65 Jamicaway St.','Boston','MA','(617)146-9374','1997-7-4');
+INSERT INTO PATIENT VALUES (69302,'9','Kelly','24 Park st.','Boston','MA','(617)149-2648','1992-9-27');
+INSERT INTO PATIENT VALUES (36728,'6','Jasmin','33 School St.','Boston','MA','(617)134-0134','1998-11-3');
+INSERT INTO PATIENT VALUES (40184,'5','Annie','38 Summer St.','Boston','MA','(617)143-8193','1890-4-25');
+INSERT INTO PATIENT VALUES (40837,'1','Micheal','58 Brattle St.','Boston','MA','(617)637-0912','1981-6-13');
+INSERT INTO PATIENT VALUES (59272,'7','Phillip','12 Franklin St.','Boston','MA','(617)123-9124','1997-3-22');
+INSERT INTO PATIENT VALUES (90245,'10','Patrick','4 North St.','Boston','MA','(617)781-4578','1991-4-19');
+
+
+/*Physician*/
+INSERT INTO PHYSICIAN VALUES (00124,'8','90904','William','1 Lynn St.','Boston','MA','01901','(617)755-0912');
+INSERT INTO PHYSICIAN VALUES (00132,'1','40837','Bob','9 Charles St.','Boston','MA','02114','(617)412-0999');
+INSERT INTO PHYSICIAN VALUES (00100,'15','56728','Leonard','71 Beacon St.','Boston','MA','02133','(617)001-4134');
+INSERT INTO PHYSICIAN VALUES (00110,'6','36728','Arthur','34 Jackson Ave','Boston','MA','02113','(617)615-8711');
+INSERT INTO PHYSICIAN VALUES (00109,'3','77728','Michael','178 Cross St.','Boston','MA','02145','(617)431-8910');
+INSERT INTO PHYSICIAN VALUES (00152,'2','12420','Louis','44 Eliot St.','Boston','MA','02130','(617)132-4477');
+INSERT INTO PHYSICIAN VALUES (00324,'14','18902','Ronald','51 May St.','Boston','MA','02130','(617)543-1889');
+INSERT INTO PHYSICIAN VALUES (00214,'1','10789','Theodor','7 Albano St.','Boston','MA','02131','(617)111-9278');
+INSERT INTO PHYSICIAN VALUES (00167,'9','69302','Clark','133 West St.','Boston','MA','02131','(617)001-8658');
+INSERT INTO PHYSICIAN VALUES (00032,'7','78934','Jane','6 Fenway St.','Boston','MA','02215','(617)998-6534');
+
+
+
+/*hospital*/
+INSERT INTO Hospital VALUES ('01', 'Brigham and Womens Hospital', '221 Longwood Avenue', 'Boston', 'MA','02115', '6177325500');
+INSERT INTO Hospital VALUES ('02', 'Arbour Hospital', '49 Robinwood Avenue', 'Boston', 'MA', '02130', '6175224400');
+INSERT INTO Hospital VALUES ('03', 'Partners HealthCare System Incorporated', '800 Boylston Street', 'Boston', 'MA', '02199', '6172781000');
+INSERT INTO Hospital VALUES ('04', 'Mass General Division of Trauma, Emergency Surgery', '165 Cambridge Street Suite 810', 'Boston', 'MA', '02114', '6177262760');
+INSERT INTO Hospital VALUES ('05', 'Massachusetts General Hospital', '55 Fruit Street', 'Boston', 'MA', '02114', '6177262000');
+INSERT INTO Hospital VALUES ('06', 'Shriners Hospitals for Children', '51 Blossom Street', 'Boston', 'MA', '02114', '6177223000');
+INSERT INTO Hospital VALUES ('07', 'Brigham and Womens Hospital', '221 Longwood Avenue', 'Boston', 'MA', '02115', '6177325500');
+INSERT INTO Hospital VALUES ('08', 'New England Baptits Hospital', '125 Parker Hill Avenue', 'Boston', 'MA', '02120', '6177545000');
+INSERT INTO Hospital VALUES ('09', 'Brigham and Womens Hospital', '221 Longwood Avenue', 'Boston', 'MA', '02115', '6177325500');
+INSERT INTO Hospital VALUES ('10', 'Beth Israel Deaconess Hospital-Milton', '199 Reedsdale Road', 'Milton', 'MA', '02186', '6176964600');
+INSERT INTO Hospital VALUES ('11', 'Brigham and Womens Hospital', '221 Longwood Avenue', 'Boston', 'MA', '02115', '6177325500');
+INSERT INTO Hospital VALUES ('12', 'Beth Israel Deaconess Medical Center', '330 Brookline Avenue', 'Boston', 'MA', '02215', '6176677000');
+INSERT INTO Hospital VALUES ('13', 'Franciscan Childrens', '30 Warren Street', 'Boston', 'MA', '02135', '6172543800');
+INSERT INTO Hospital VALUES ('14', 'Mass Genereal Hospital Digestive: Crohns and Colitis Center', '156 Cambridge Street', 'Boston', 'MA', '02114', '6177246005');
+INSERT INTO Hospital VALUES ('15', 'Childrens Hospital AIDS Program', '333 Longwood Avenue #650', 'Boston', 'MA', '02115', '6173556832');
+
+/*QUERIES*/
+/*List out all patient info*/
+SELECT Patient_Name, Patient_Id, Patient_DOB, Patient_Adress, Patient_City, Patient_State, Patient_Phone FROM Patient
+/*List out all hospital info*/
+SELECT Hospital_Id, Hostpital_Name, Hospital_Adress, Hospital_City, Hospital_State, Hospital_Zip, Hospital_Phone FROM Hospital
+/*List out all physician info*/
+SELECT Physician_Id, Hospital_Id, Patient_Id, Physician_Name, Physician_Adress, Physician_State, Physician_City, Physician_Zip, Physician_Phone FROM Physician
+/*List out all staff info*/
+SELECT Staff_Id, Hospital_Id, Staff_Name, Staff_Adress, Staff_City, Staff_State, Staff_Phone, Staff_DOB FROM Staff
+/*List by name that we search for*/
+SELECT Patient_Name, Patient_Id, Patient_DOB FROM Patient WHERE Patient_Name LIKE '%Smith%'
+//List by alphabetical order
+SELECT Patient_Name, Patient_Id, Patient_DOB FROM Patient ORDER BY Patient_Name asc
+/*grouped by patient id*/
+SELECT Patient_Name, Patient_Id, Patient_DOB FROM Patient GROUP BY Patient_Id
+/*group by patient id where their id is less than 20000*/
+SELECT Patient_Name, Patient_Id, Patient_DOB FROM Patient WHERE Patient_Id < 20000 group by Patient_Id
+/*group by hospital id*/
+SELECT Hospital_Id, Hostpital_Name, Hospital_Adress, Hospital_State, Hospital_City, Hospital_Zip, Hospital_Phone GROUP BY Hospital_Id;
+/*group by hospital id where the hospital address has street in its name*/
+SELECT Hospital_Id, Hostpital_Name, Hospital_Adress, Hospital_State, Hospital_City, Hospital_Zip, Hospital_Phone FROM Hospital WHERE Hospital_Adress LIKE '%street%' GROUP BY Hospital_Id
+/*group by hospital id where the hospital address has street and the hospital id is greater than 10*/
+SELECT Hospital_Id, Hostpital_Name, Hospital_Adress, Hospital_State, Hospital_City, Hospital_Zip, Hospital_Phone FROM Hospital WHERE Hospital_Adress LIKE '%street%' GROUP BY Hospital_Id HAVING Hospital_Id >10 ORDER BY Hostpital_Name
+/*physicians who have patients*/
+SELECT c.Patient_Id, Patient_Name, Physician_Name, Physician_Id FROM Patient c, Physician v WHERE c.Patient_id = v.Patient_id
+/*print patients and show who has a physician and who doesn't*/
+SELECT c.Patient_Id, Patient_Name, Physician_Name, Physician_Id FROM Patient c LEFT JOIN Physician v ON c.Patient_id = v.Patient_id
+/*prints staffs who works in hospital and who doesn't it leaves null*/
+SELECT c.Staff_Id, Staff_Name, Staff_Adress, Staff_City, Hospital_Id, Hostpital_Name, Hospital_Adress FROM Staff c LEFT JOIN Hospital v ON c.Staff_Id = v.Staff_Id;
+/*prints staff who works in hospitals and also has the same hospital id.*/
+SELECT c.Hospital_Id, Staff_Name, Staff_Id, Staff_Adress, Staff_City, Hostpital_Name, Hospital_Adress FROM Staff c LEFT JOIN Hospital v ON c.Hospital_Id = v.Hospital_Id
